@@ -1,29 +1,63 @@
-import React from "react";
 import React, { useState, useEffect } from "react";
+import sha256 from "sha-256-js";
 import "./App.css";
 
 function App() {
-  const [jobs, setJobs] = useState("");
+  const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    collectJobs();
-  })
+    collectJobs()
+  }, []);
 
   const collectJobs = () => {
-    fetch("https://cors-anywhere.herokuapp.com/" + "https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true&sort=p").then((res) => {
-  res.text().then((xmlTxt) => {
-    var domParser = new DOMParser()
-    let doc = domParser.parseFromString(xmlTxt, 'text/xml')
-    doc.querySelectorAll('item').forEach((item, i) => {
-      let para = document.createElement('p')
-      let title = item.querySelector('title').textContent
-      para.textContent = title
-      document.querySelector('.container').appendChild(para)
-      console.log(item, i)
-    })
-  })
-}) 
-/*fetch("https://cors-anywhere.herokuapp.com/" + "https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true&sort=p").then((res) => {
-  res.text().then((xmlTxt) => {
+    fetch(
+      "https://cors-anywhere.herokuapp.com/" +
+        "https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true"
+    ).then(res => {
+      res.text().then(xmlTxt => {
+        const domParser = new DOMParser();
+        const doc = domParser.parseFromString(xmlTxt, "text/xml");
+        const items = doc.querySelectorAll("item")
+        const jobsArr = []
+        items.forEach((item, i) => {
+          const title = item.querySelector('title').textContent;
+          const author = item.querySelector('author').textContent;
+          const link = item.querySelector('link').textContent;
+          const categories = []
+          const categoriesNodes = item.querySelectorAll('category');
+          categoriesNodes.forEach(categoryNode => categories.push(categoryNode.textContent))
+          const description = item.querySelector('description').textContent;
+          const updateTime = item.querySelector('updated').textContent;
+          const id = sha256(title + author + link + updateTime)
+          const itemObj = {
+            title,
+            author,   
+            link,
+            categories,
+            description,
+            updateTime,
+            id,
+          }
+          jobsArr.push(itemObj)
+        })
+        sortJobsByUpdateDate(jobsArr)
+        filterJobs(jobsArr)
+        return jobsArr
+      }).then(jobsArr => setJobs(jobsArr))
+    });
+
+    const sortJobsByUpdateDate = jobsArr => jobsArr.sort((a,b) => (a.updateTime < b.updateTime) ? 1 : ((b.updateTime < a.updateTime) ? -1 : 0)); 
+
+    const filterJobs = jobsArr => {
+      const keyWords = ["front-end", "front", "javascript", "html", "css", "angular", "angularjs", "react", "reactjs", "react.js", "native", "angular.js", "angular2", "ember", "svelte", "web"]
+      const filteredJobs = jobsArr.forEach(job => {
+        return job.title.split(" ")
+      }
+        /* .filter(titleArrItem => titleArrItem.includes(keyWords)) */
+      ).filter(titleArrItem => titleArrItem.includes(keyWords))
+      console.log(filteredJobs) 
+    } 
+    /*fetch("https://cors-anywhere.herokuapp.com/" + "https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true&sort=p").then((res) => {
+  res.text().then((xmlTxt) => { 
     var domParser = new DOMParser()
     let doc = domParser.parseFromString(xmlTxt, 'text/xml')
     const item1 = doc.querySelectorAll('item')[0]
@@ -48,21 +82,8 @@ function App() {
     document.querySelector('.container').appendChild(div2)
   })
 })*/
-fetch("https://cors-anywhere.herokuapp.com/"+"https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true&sort=p").then((res) => {
-  res.text().then((xmlTxt) => {
-    const domParser = new DOMParser()
-    const doc = domParser.parseFromString(xmlTxt, 'text/xml')
-    doc.querySelectorAll('item').forEach((item,i) => {
-      
-       /* let para = document.createElement('p')
-        let title = item.querySelector('title').textContent
-        para.textContent = title
-        document.querySelector('.container').appendChild(para)
-         console.log(item, i) */
-       })
-     })
-})
-/*fetch("https://cors-anywhere.herokuapp.com/"+"https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true&sort=i&pg=3").then((res) => {
+
+    /*fetch("https://cors-anywhere.herokuapp.com/"+"https://stackoverflow.com/jobs/feed?q=front-end+developer&r=true&sort=i&pg=3").then((res) => {
   res.text().then((xmlTxt) => {
     var domParser = new DOMParser()
     let doc = domParser.parseFromString(xmlTxt, 'text/xml')
@@ -75,7 +96,7 @@ fetch("https://cors-anywhere.herokuapp.com/"+"https://stackoverflow.com/jobs/fee
        })
      })
 }) */
-/* fetch("https://cors-anywhere.herokuapp.com/"+"http://rss.indeed.com/rss?q=front+end+web+developer&l=Remote").then((res) => {
+    /* fetch("https://cors-anywhere.herokuapp.com/"+"http://rss.indeed.com/rss?q=front+end+web+developer&l=Remote").then((res) => {
   res.text().then((xmlTxt) => {
     var domParser = new DOMParser()
     let doc = domParser.parseFromString(xmlTxt, 'text/xml')
@@ -127,12 +148,8 @@ fetch("https://cors-anywhere.herokuapp.com/"+"http://rss.indeed.com/rss?q=front+
        })
      })
 })  */
-  }
-  return (
-  <div className="App">
-    
-  </div>
-  );
+  };
+  return <div className="App"></div>;
 }
 
 export default App;
