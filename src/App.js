@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sha256 from "sha-256-js";
 import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -59,7 +60,9 @@ function App() {
       sortJobsByUpdateDate(filteredJobs)
     } 
   };
-  return <div className="App"></div>;
+  return <div className="App">
+    <Header />
+  </div>;
 }
 
 export default App;
