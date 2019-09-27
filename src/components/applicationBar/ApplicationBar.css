@@ -1,0 +1,12 @@
+.root {
+  flex-grow: 1;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  background: green;
+}
+
+.title {
+  margin-left: 12px !important;
+}
