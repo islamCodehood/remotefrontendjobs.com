@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sha256 from "sha-256-js";
 import "./App.css";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 
 function App() {
   const [jobs, setJobs] = useState([]);
