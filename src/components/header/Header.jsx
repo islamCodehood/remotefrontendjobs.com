@@ -3,12 +3,14 @@ import ApplicationBar from "../applicationBar/ApplicationBar";
 import { Hidden, Typography } from "@material-ui/core";
 import HeroImg from "../HeroImg/HeroImg";
 import "./Header.css"
+import SubscripeInput from "../subscripeInput/SubscripeInput";
 const Header = () => {
   return (
     <header>
       <ApplicationBar />
       <HeroImg />
-      <Typography variant="subtitle1" className="title-header">REMOTE FRONT-END JOBS</Typography>
+      <Typography variant="h1" className="title-header">REMOTE FRONT-END JOBS</Typography>
+      <SubscripeInput />
     </header>
   );
 };
