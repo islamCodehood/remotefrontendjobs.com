@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Typography, Button, IconButton, Toolbar  } from "@material-ui/core";
-//import MenuIcon from "@material-ui/icons/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
 import "./ApplicationBar.css"
 
 const ApplicationBar = () => {
@@ -18,7 +18,7 @@ const ApplicationBar = () => {
             color="inherit"
             aria-label="menu"
           >
-            {/* <MenuIcon /> */}
+            <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
