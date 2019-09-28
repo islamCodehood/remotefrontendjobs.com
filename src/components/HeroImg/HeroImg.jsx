@@ -8,11 +8,11 @@ const HeroImg = () => {
     return ( 
         <div className="heroImg-wrapper">
             <picture>
-                <source srcset={img1xs} media={"min-width: 320px"} />
-                <source srcset={img1sm} media="min-width: 576px" />
-                <source srcset={img1md} media="(min-width: 768px)" />
-                <source srcset={img1lg} media="(min-width: 1200px)" />
-                <img src={img1xs} alt="remote front-end jobs" />
+                <source srcSet={img1md} media="(min-width: 1200px)" />
+                <source srcSet={img1md} media="(min-width: 768px)" />
+                <source srcSet={img1sm} media="(min-width: 576px)" />
+                <source srcSet={img1xs} media="(min-width: 320px)" />
+                <img src={img1lg} alt="remote front-end jobs" />
             </picture>
         </div>
      );
