@@ -7,13 +7,13 @@ import "./HeroImg.css"
 const HeroImg = () => {
     return ( 
         <div className="heroImg-wrapper">
-            <picture>
+            {/* <picture>
                 <source srcSet={img1md} media="(min-width: 1200px)" />
                 <source srcSet={img1md} media="(min-width: 768px)" />
                 <source srcSet={img1sm} media="(min-width: 576px)" />
                 <source srcSet={img1xs} media="(min-width: 320px)" />
                 <img src={img1lg} alt="remote front-end jobs" />
-            </picture>
+            </picture> */}
         </div>
      );
 }
