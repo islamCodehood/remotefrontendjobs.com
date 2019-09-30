@@ -6,8 +6,8 @@ header {
 .title-header-wrapper {
     position: absolute;
     width: 280px;
-    top: 50%;
-    left: calc(50%-40px);
+    top: 60%;
+    left: calc(50% - 140px);   
 }
 .title-header {
     widows: 100%;
