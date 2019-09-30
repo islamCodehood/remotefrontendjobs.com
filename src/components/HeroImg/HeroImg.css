@@ -2,6 +2,8 @@
   position: relative;
   width: 100%;
   z-index: -1000;
+  height: 35vh;
+  background: #730033;
 }
 img {
   width: 100%;
