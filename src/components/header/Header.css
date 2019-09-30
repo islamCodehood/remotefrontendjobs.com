@@ -1,13 +1,20 @@
 header {
     width: 100%;
     height: 100%;
+    position: relative;
 }
-
+.title-header-wrapper {
+    position: absolute;
+    width: 280px;
+    top: 50%;
+    left: calc(50%-40px);
+}
 .title-header {
+    widows: 100%;
     color: #e3ffbf;
     font-size: 20px !important;
     font-weight: 600 !important;
-    margin-top: -130px !important;
+    /* margin-top: -130px !important; */
     display: block;
     z-index: 1000;
 }
