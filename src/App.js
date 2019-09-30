@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import sha256 from "sha-256-js";
 import "./App.css";
 import Header from "./components/header/Header";
+import JobCard from "./components/JobCard";
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -62,6 +63,7 @@ function App() {
   };
   return <div className="App">
     <Header />
+    <JobCard />
   </div>;
 }
 
