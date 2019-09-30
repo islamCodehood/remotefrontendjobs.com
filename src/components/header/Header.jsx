@@ -9,8 +9,10 @@ const Header = () => {
     <header>
       <ApplicationBar />
       <HeroImg />
-      <Typography variant="h1" className="title-header">REMOTE FRONT-END JOBS</Typography>
-      <SubscripeInput />
+      <div className="title-header-wrapper">
+        <Typography variant="h1" className="title-header">REMOTE FRONT-END JOBS</Typography>
+      </div>
+      {/* <SubscripeInput /> */}
     </header>
   );
 };
