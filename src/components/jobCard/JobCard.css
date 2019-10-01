@@ -1,0 +1,15 @@
+.tech {
+    margin-right: 6px !important;
+    background: #e3ffbf;
+    color: #007340 !important;
+    padding: 3px;
+}
+/* 
+.tech:hover {
+    cursor: pointer !important;
+    background: red;
+} */
+
+.period {
+    align-self: flex-end;
+}
