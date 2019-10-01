@@ -44,6 +44,7 @@ function App() {
         
         return jobsArr
       }).then(jobsArr => {
+
         filterJobs(jobsArr)
       })
     });
@@ -54,7 +55,7 @@ function App() {
     } 
 
     const filterJobs = jobsArr => {
-      const keyWords = ["front-end", "front", "javascript", "html", "css", "angular", "angularjs", "react", "reactjs", "react.js", "native", "angular.js", "angular2", "ember", "svelte", "web"]
+      const keyWords = ["front-end", "front", "frontend", "javascript", "html", "css", "angular", "angularjs", "react", "reactjs", "react.js", "native", "angular.js", "angular2", "ember", "svelte", "web"]
       const filteredJobs =  keyWords.map(keyWord => 
         jobsArr.filter(job => job.title.toLowerCase().split(" ").includes(keyWord))
       ).flat()
