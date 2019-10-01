@@ -1,22 +1,15 @@
 import React from 'react';
-import JobCard from '../JobCard'
+import JobCard from '../jobCard/JobCard'
 import './CardsCollection.css'
 
-const CardsCollection = () => {
+const CardsCollection = (props) => {
     return ( 
         <ul className="cards-collection">
-            <li>
-                <JobCard />
-            </li>
-            <li>
-                <JobCard />
-            </li>
-            <li>
-                <JobCard />
-            </li>
-            <li>
-                <JobCard />
-            </li>
+            {props.jobs.map(job => (
+                <li key={job.id}>
+                    <JobCard title={job.title} company={job.author} techs={job.categories} date={job.updateTime} />
+                </li>
+            ))}
         </ul>
      );
 }
