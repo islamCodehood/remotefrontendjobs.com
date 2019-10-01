@@ -13,11 +13,11 @@ const useStyles = makeStyles(theme => ({
    
    }));
 
-const Home = () => {
+const Home = (props) => {
     const classes = useStyles();
     return ( 
         <Paper className={classes.homePage}>
-            <CardsCollection />
+            <CardsCollection jobs={props.jobs} />
         </Paper>
      );
 }
