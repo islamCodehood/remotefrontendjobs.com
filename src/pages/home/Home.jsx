@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "-50px",
       marginRight: "12px",
       marginLeft: "12px",
+      minHeight: "50vh",
     },
    
    }));
