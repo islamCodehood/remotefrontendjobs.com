@@ -33,7 +33,7 @@ function App() {
             );
             const description = item.querySelector("description").textContent;
             const updateTime = item.querySelector("updated").textContent;
-            const id = sha256(title + author + link + updateTime);
+            const id = i;
             const itemObj = {
               title,
               author,
@@ -50,19 +50,35 @@ function App() {
         })
         .then(jobsArr => {
           filterJobs(jobsArr);
-          cutTitle(jobsArr)
         });
     });
-    const cutTitle = jobsArr => {const indices = jobsArr.map(job => job.title.split(' ').findIndex(titleWord => titleWord === "at"))
-    console.log(indices)
-    
-  }
+    const cutTitle = jobsArr => {
+      const indices = jobsArr.map(job =>
+        job.title.indexOf(" at ")
+      );
 
+      let cutJobs = jobsArr.map((job, i) => 
+        {job.title = job.title.substring(0, indices[i])
+          return job}
+      )
+      sortJobsByUpdateDate(cutJobs);
+    };
+ 
     const sortJobsByUpdateDate = filteredJobs => {
+      //console.log(cutJobs);
       filteredJobs.sort((a, b) =>
         a.updateTime < b.updateTime ? 1 : b.updateTime < a.updateTime ? -1 : 0
       );
-      setJobs(filteredJobs);
+      //console.log(cutJobs);
+      const filteredDuplicates = filteredJobs.filter((job, index, jobs) => {
+        if (index < jobs.length - 1) {
+          return job.title !== jobs[index + 1].title
+        }else {
+          return job
+        }
+      })
+
+      setJobs(filteredDuplicates);
     };
 
     const filterJobs = jobsArr => {
@@ -85,9 +101,12 @@ function App() {
         "svelte",
         "web"
       ];
+      const indices = jobsArr.map(job =>
+        job.title.split(" ").findIndex(titleWord => titleWord === "at")
+      );
       const filteredJobs = keyWords
         .map(keyWord =>
-          jobsArr.filter(job =>
+          jobsArr.filter((job, i) =>
             job.title
               .toLowerCase()
               .split(" ")
@@ -95,7 +114,8 @@ function App() {
           )
         )
         .flat();
-      sortJobsByUpdateDate(filteredJobs);
+        cutTitle(filteredJobs)
+        
     };
   };
   return (
