@@ -1,59 +1,77 @@
 import React from "react";
 //import { makeStyles } from '@material-ui/core/styles';
-import './JobCard.css'
+import "./JobCard.css";
 import {
   Card,
   CardContent,
   CardActions,
   Typography,
-  makeStyles
+  makeStyles,
+  Link
 } from "@material-ui/core";
-//import { flexbox } from "@material-ui/system";
+
 
 const useStyles = makeStyles(theme => ({
   card: {
     display: "flex",
-    //minWidth: "300px",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
     marginBottom: "12px"
   },
   content: {
     display: "flex",
+    flexWrap: "wrap",
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-    width: "100%",
+    width: "100%"
   },
   techsWrapper: {
     width: "100%",
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "flex-start",
     alignItems: "center"
-  },
-  
+  }
 }));
-const JobCard = (props) => {
+const JobCard = props => {
   const classes = useStyles();
-  const { title, company, techs, date } = props;
+  const { title, company, techs, date, link } = props;
+  const todayDate = new Date()
+  const publishDate = new Date(date)
+  const dateDifference = Math.abs(todayDate - publishDate)
+  const dayNumbers = Math.ceil(dateDifference / (60 * 60 * 24 * 1000))
   return (
     <Card className={classes.card}>
       <CardContent className={classes.content}>
-        <Typography component="h2" variant="subtitle1" color="textPrimary">
+        <Typography
+          component="h2"
+          variant="subtitle1"
+          color="textPrimary"
+          align="left"
+        >
+          <Link
+            href={link}
+            target="_blank"
+            rel="noopener"
+            color="inherit"
+          >
             {title}
+          </Link>
         </Typography>
         <Typography variant="subtitle2" color="textSecondary">
-            {company}
+          {company}
         </Typography>
-        <div className={classes.techsWrapper}> {
-          techs.map(tech => (
+        <div className={classes.techsWrapper}>
+
+          {techs.map(tech => (
             <Typography className="tech" variant="body2">
-            {tech}
-          </Typography>
-          ))
-        }
-          
+              {tech}
+            </Typography>
+          ))}
         </div>
         <Typography className="period" variant="caption" color="textSecondary">
-          3 days
+          {dayNumbers} day(s)
         </Typography>
       </CardContent>
     </Card>
