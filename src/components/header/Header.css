@@ -5,7 +5,7 @@ header {
 }
 .title-header-wrapper {
     position: absolute;
-    width: 280px;
+    width: 380px;
     top: 60%;
     left: calc(50% - 140px);   
 }
