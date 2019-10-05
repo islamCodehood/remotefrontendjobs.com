@@ -4,6 +4,7 @@ import CardsCollection from '../../components/CardsCollection/CardsCollection';
 
 const useStyles = makeStyles(theme => ({
     homePage: {
+      maxWidth: "1000px",
       padding: "12px",
       backgroundColor: "#e3ffbf",
       marginTop: "-50px",
