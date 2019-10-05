@@ -7,7 +7,7 @@ import SubscripeInput from "../subscripeInput/SubscripeInput";
 const Header = () => {
   return (
     <header>
-      <ApplicationBar />
+      {/* <ApplicationBar /> */}
       <HeroImg />
       <div className="title-header-wrapper">
         <Typography variant="h1" className="title-header">REMOTE FRONT-END JOBS</Typography>
