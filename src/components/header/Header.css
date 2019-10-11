@@ -3,18 +3,11 @@ header {
     height: 100%;
     position: relative;
 }
-.title-header-wrapper {
-    position: absolute;
-    width: 380px;
-    top: 60%;
-    left: calc(50% - 140px);   
-}
+
 .title-header {
     widows: 100%;
-    color: #e3ffbf;
-    font-size: 20px !important;
-    font-weight: 600 !important;
-    /* margin-top: -130px !important; */
+    color: #fff;
+    font-size: 36px !important;
     display: block;
     z-index: 1000;
 }
