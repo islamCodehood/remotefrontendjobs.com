@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "flex-start",
-    marginBottom: "12px"
+    marginBottom: "24px",
+    backgroundColor: "#e5eaef",
   },
   content: {
     display: "flex",
