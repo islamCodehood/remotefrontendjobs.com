@@ -3,7 +3,7 @@
   width: 100%;
   z-index: -1000;
   height: 35vh;
-  background: #730033;
+  background: #013364;
 }
 img {
   width: 100%;
@@ -15,7 +15,7 @@ img {
   color: #e3ffbf;
   font-size: 20px !important;
   font-weight: 600 !important;
-  /* margin-top: -130px !important; */
+  padding: 12px !important;
   display: block;
   z-index: 1000;
 }
