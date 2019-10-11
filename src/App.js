@@ -3,6 +3,7 @@ import sha256 from "sha-256-js";
 import "./App.css";
 import Header from "./components/header/Header";
 import Home from "./pages/home/Home";
+import SideMenu from "./components/SideMenu/SideMenu";
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -53,17 +54,15 @@ function App() {
         });
     });
     const cutTitle = jobsArr => {
-      const indices = jobsArr.map(job =>
-        job.title.indexOf(" at ")
-      );
+      const indices = jobsArr.map(job => job.title.indexOf(" at "));
 
-      let cutJobs = jobsArr.map((job, i) => 
-        {job.title = job.title.substring(0, indices[i])
-          return job}
-      )
+      let cutJobs = jobsArr.map((job, i) => {
+        job.title = job.title.substring(0, indices[i]);
+        return job;
+      });
       sortJobsByUpdateDate(cutJobs);
     };
- 
+
     const sortJobsByUpdateDate = filteredJobs => {
       //console.log(cutJobs);
       filteredJobs.sort((a, b) =>
@@ -72,11 +71,11 @@ function App() {
       //console.log(cutJobs);
       const filteredDuplicates = filteredJobs.filter((job, index, jobs) => {
         if (index < jobs.length - 1) {
-          return job.title !== jobs[index + 1].title
-        }else {
-          return job
+          return job.title !== jobs[index + 1].title;
+        } else {
+          return job;
         }
-      })
+      });
 
       setJobs(filteredDuplicates);
     };
@@ -101,9 +100,9 @@ function App() {
         "svelte",
         "web"
       ];
-      const indices = jobsArr.map(job =>
+      /* const indices = jobsArr.map(job =>
         job.title.split(" ").findIndex(titleWord => titleWord === "at")
-      );
+      ); */
       const filteredJobs = keyWords
         .map(keyWord =>
           jobsArr.filter((job, i) =>
@@ -114,14 +113,21 @@ function App() {
           )
         )
         .flat();
-        cutTitle(filteredJobs)
-        
+      cutTitle(filteredJobs);
     };
   };
+  const techs = jobs
+    .map(job => job.categories)
+    .flat()
+    .sort()
+    .filter((tech, index, techs) => tech !== techs[index + 1]);
   return (
     <div className="App">
       <Header />
-      <Home jobs={jobs} />
+      <main>
+        <Home jobs={jobs} />
+        <SideMenu techs={techs} />
+      </main>
     </div>
   );
 }
