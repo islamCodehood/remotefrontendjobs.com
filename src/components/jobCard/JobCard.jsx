@@ -4,7 +4,7 @@ import "./JobCard.css";
 import {
   Card,
   CardContent,
-  CardActions,
+  /* CardActions, */
   Typography,
   makeStyles,
   Link
@@ -37,11 +37,12 @@ const useStyles = makeStyles(theme => ({
 }));
 const JobCard = props => {
   const classes = useStyles();
-  const { title, company, techs, date, link } = props;
+  const { title, company, techs, date, link, jobReqs, id } = props;
   const todayDate = new Date()
   const publishDate = new Date(date)
   const dateDifference = Math.abs(todayDate - publishDate)
   const dayNumbers = Math.ceil(dateDifference / (60 * 60 * 24 * 1000))
+
   return (
     <Card className={classes.card}>
       <CardContent className={classes.content}>
@@ -63,8 +64,9 @@ const JobCard = props => {
         <Typography variant="subtitle2" color="textSecondary">
           {company}
         </Typography>
+        {/* <Typography variant="subtitle2" color="textSecondary">{jobType}</Typography>
+        <Typography variant="subtitle2" color="textSecondary">{experience}</Typography> */}
         <div className={classes.techsWrapper}>
-
           {techs.map(tech => (
             <Typography className="tech" variant="body2">
               {tech}
