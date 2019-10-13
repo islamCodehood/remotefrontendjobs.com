@@ -18,9 +18,10 @@ const useStyles = makeStyles(theme => ({
 
 const Home = (props) => {
     const classes = useStyles();
+    const { jobs/* , jobReqs */ } = props
     return ( 
         <Paper className={classes.homePage}>
-            <CardsCollection jobs={props.jobs} />
+            <CardsCollection jobs={jobs} /* jobReqs={jobReqs} */ />
         </Paper>
      );
 }
