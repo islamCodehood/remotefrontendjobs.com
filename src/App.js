@@ -10,6 +10,10 @@ function App() {
   useEffect(() => {
     collectJobs();
   }, []);
+/*   const [jobReqs, setJobReqs] = useState([]);
+  useEffect(() => {
+    addJobReqs(jobs);
+  }, []); */
 
   const collectJobs = () => {
     fetch(
@@ -35,6 +39,7 @@ function App() {
             const description = item.querySelector("description").textContent;
             const updateTime = item.querySelector("updated").textContent;
             const id = i;
+
             const itemObj = {
               title,
               author,
@@ -42,7 +47,7 @@ function App() {
               categories,
               description,
               updateTime,
-              id
+              id,
             };
             jobsArr.push(itemObj);
           });
@@ -76,7 +81,7 @@ function App() {
           return job;
         }
       });
-
+      //addJobTypeAndExperience(filteredDuplicates);
       setJobs(filteredDuplicates);
     };
 
@@ -100,9 +105,7 @@ function App() {
         "svelte",
         "web"
       ];
-      /* const indices = jobsArr.map(job =>
-        job.title.split(" ").findIndex(titleWord => titleWord === "at")
-      ); */
+
       const filteredJobs = keyWords
         .map(keyWord =>
           jobsArr.filter((job, i) =>
@@ -113,19 +116,73 @@ function App() {
           )
         )
         .flat();
+
       cutTitle(filteredJobs);
     };
   };
+
+/*   const addJobTypeAndExperience = filteredDuplicates => {
+    let updatedJobs = [];
+    filteredDuplicates.forEach(job => {
+      fetch("https://cors-anywhere.herokuapp.com/" + job.link)
+        .then(res => res.text())
+        .then(txt => {
+          var domParser = new DOMParser();
+          let doc = domParser.parseFromString(txt, "text/html");
+          const jobType = doc.querySelector(".job-details--about")
+            .firstElementChild.firstElementChild.lastElementChild.textContent;
+          const experience = doc.querySelector(".job-details--about")
+            .firstElementChild.firstElementChild.nextElementSibling
+            .lastElementChild.textContent;
+          job.jobType = jobType;
+          job.experience = experience;
+          updatedJobs.push(job);
+          console.log(job)
+        }); 
+    });
+    console.log(updatedJobs); 
+    setJobs(filteredDuplicates);
+    addJobReqs(filteredDuplicates)
+  }; */
   const techs = jobs
     .map(job => job.categories)
     .flat()
     .sort()
     .filter((tech, index, techs) => tech !== techs[index + 1]);
+
+  /* const addJobReqs = jobs => {
+    let items = []
+    jobs.forEach(job => 
+      fetch("https://cors-anywhere.herokuapp.com/" + job.link)
+        .then(res => res.text())
+        .then(txt => {
+          
+          var domParser = new DOMParser();
+          let doc = domParser.parseFromString(txt, "text/html");
+          const jobType = doc.querySelector(".job-details--about")
+            .firstElementChild.firstElementChild.lastElementChild.textContent;
+          const experience = doc.querySelector(".job-details--about")
+            .firstElementChild.firstElementChild.nextElementSibling
+            .lastElementChild.textContent;
+            const id = job.id
+          let reqs = {
+            jobType,
+            experience,
+            id
+          }
+          items.push(reqs)
+          console.log(items)
+          return items
+        })
+      
+      )
+  } */
+
   return (
     <div className="App">
       <Header />
       <main>
-        <Home jobs={jobs} />
+        <Home jobs={jobs}/*  jobReqs={addJobReqs(jobs)} */ /> 
         <SideMenu techs={techs} />
       </main>
     </div>
