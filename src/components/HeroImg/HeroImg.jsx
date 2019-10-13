@@ -1,8 +1,8 @@
 import React from 'react';
-import img1xs from '../../img/hero/img1xs.jpg';
+/* import img1xs from '../../img/hero/img1xs.jpg';
 import img1sm from '../../img/hero/img1sm.jpg';
 import img1md from '../../img/hero/img1md.jpg';
-import img1lg from '../../img/hero/img1lg.jpg';
+import img1lg from '../../img/hero/img1lg.jpg'; */
 import "./HeroImg.css"
 import { Typography } from '@material-ui/core';
 const HeroImg = () => {
